@@ -43,8 +43,12 @@ jobs:
           distribution: ${{ env.DISTRIBUTION }}
           cache: 'maven'
 
-      - name: Build angular then java with Maven
-        run: cd frontend  npm install cd .. mvn clean install
+      - name: Build angular, java with Maven
+        run: |
+        cd frontend 
+        npm install 
+        cd ..
+        mvn clean install
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
