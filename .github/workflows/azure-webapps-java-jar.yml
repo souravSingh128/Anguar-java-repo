@@ -34,8 +34,14 @@ jobs:
     runs-on: windows-latest
 
     steps:
+      - uses: actions/checkout@master
+      - name: copy file
+        uses: canastro/copy-file-action@master
+        with:
+         source: "frontend/src/app/app.component.html"
+         target: "frontend/src/environments"
+         
       - uses: actions/checkout@v3
-
       - name: Set up Java version
         uses: actions/setup-java@v3.0.0
         with:
