@@ -51,30 +51,39 @@ jobs:
         run: npm run build --if-present
         working-directory: frontend
         
-      - name: copying files
-        run: \cp frontend/dist/angular-basic src/main/resources
+      - name: Build with Maven
+        run: mvn clean install
       
         
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
         with:
-          name: java-app
+          name: angular-content
           path: '${{ github.workspace }}/frontend/dist/angular-basic'
+          
+      - name: Upload artifact for deployment job
+        uses: actions/upload-artifact@v3
+        with:
+          name: java-jar
+          path: '${{ github.workspace }}/target/*.jar'
 
   deploy:
-    permissions:
-      contents: none
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     needs: build
     environment:
-      name: 'Development'
+      name: 'production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     
     steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v3
         with:
-          name: java-app
+          name: angular-content
+          
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v3
+        with:
+          name: java-jar
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
