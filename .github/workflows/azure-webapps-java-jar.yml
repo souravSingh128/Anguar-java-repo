@@ -44,10 +44,9 @@ jobs:
           cache: 'maven'
 
       - name: Build angular, java with Maven
-        run: cd frontend 
-      - name: install angular modules
         run: npm install
-
+        working-directory: frontend
+        
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
         with:
