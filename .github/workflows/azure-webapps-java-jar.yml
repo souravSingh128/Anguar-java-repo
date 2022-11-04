@@ -55,13 +55,6 @@ jobs:
         
       - name: Build with Maven
         run: mvn clean install
-      
-        
-      - name: Upload artifact for deployment job
-        uses: actions/upload-artifact@v3
-        with:
-          name: angular-content
-          path: '${{ github.workspace }}/frontend/dist/angular-basic'
           
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
@@ -77,11 +70,6 @@ jobs:
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     
     steps:
-      - name: Download artifact from build job
-        uses: actions/download-artifact@v3
-        with:
-          name: angular-content
-          
       - name: Download artifact from build job
         uses: actions/download-artifact@v3
         with:
