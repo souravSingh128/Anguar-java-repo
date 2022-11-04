@@ -60,7 +60,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: java-jar
-          path: '${{ github.workspace }}/target/*.jar'
+          path: '${{ github.workspace }}/src/main/resources/static/'
 
   deploy:
     runs-on: windows-latest
@@ -81,4 +81,4 @@ jobs:
         with:
           app-name: ${{ env.AZURE_WEBAPP_NAME }}
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-          package: '*.jar'
+          package: '.'
